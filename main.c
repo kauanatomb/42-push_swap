@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     if (argc < 2)
         return (ft_putstr_fd("Error args\n", 2), 0);
     a = init_stack();
-    if (!parse_args_into_stack(a, argc, argv))
+    if (parse_args_into_stack(a, argc, argv) != 0)
     {
         ft_putstr_fd("Error parsing\n", 2);
         free_stack(a);
