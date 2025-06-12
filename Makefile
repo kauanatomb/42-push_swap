@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = push_swap
-SRC = #add docs
+SRC = main.c push_swap_utils.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
