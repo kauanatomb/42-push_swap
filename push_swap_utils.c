@@ -32,6 +32,8 @@ int parse_args_into_stack(t_stack *a, int argc, char **argv)
     int     value;
 
     tokens = split_args(argc, argv);
+    if (!tokens || !tokens[0])
+        return (ft_putstr_fd("Error: empty input\n", 2), 1);
     i = 0;
     value = 0;
     while (tokens[i])
@@ -42,10 +44,11 @@ int parse_args_into_stack(t_stack *a, int argc, char **argv)
             return (ft_putstr_fd("Error atoi\n", 2), 1);
         if (has_duplicate(a, value))
             return (ft_putstr_fd("Numbers duplicated in stack\n", 2), 1);
-        append_to_stack(a, value);
+        if (!append_to_stack(a, value))
+            return (ft_putstr_fd("Appending error\n", 2), 1);
         i++;
     }
-    free_split(tokens);
+    free_split(tokens, i);
     return (0);
 }
 
@@ -97,9 +100,68 @@ int is_valid_integer(const char *str)
     return (1);
 }
 
-int ft_atoi_safe(const char *str, int *out);
-int has_duplicate(t_stack *a, int value);
-int append_to_stack(t_stack *a, int value);
+int ft_atoi_safe(const char *str, int *out)
+{
+    long    result;
+    int     sign;
+
+    result = 0;
+    sign = 1;
+
+
+    if (*str == '-' || *str == '+') 
+    {
+        if (*str == '-')
+            sign = -1;
+        str++;
+    }
+    while (*str)
+    {
+        if (!(*str >= '0' && *str <= '9'))
+            return (0);
+        result = result * 10 + (*str - '0');
+        if ((sign == 1 && result > INT_MAX) || 
+                (sign == -1 && result > (long)INT_MAX + 1))
+            return (0);
+        str++;
+    }
+    *out = (int)(sign * result);
+    return (1);
+}
+
+int has_duplicate(t_stack *a, int value)
+{
+    t_node  *current;
+
+    current = a->head;
+    while (current)
+    {
+        if (current->value == value)
+            return (1);
+        current = current->next;
+    }
+    return (0);
+}
+
+int append_to_stack(t_stack *a, int value)
+{
+    t_node  *new;
+
+    new = malloc(sizeof(t_node));
+    if (!new)
+        return (0);
+    new->value = value;
+    new->index = 0;
+    new->next = NULL;
+    new->prev = a->tail;
+    if (a->size == 0)
+        a->head = new;
+    else
+        a->tail->next = new;
+    a->tail = new;
+    a->size++;
+    return (1);
+}
 
 void free_split(char **tokens, int n)
 {
@@ -111,5 +173,28 @@ void free_split(char **tokens, int n)
 
 
 void print_stack(t_stack *a)
+{
+    t_node  *current;
+
+    current = a->head;
+    while (current)
+    {
+        ft_printf("value: %d\n", current->value);
+        current = current->next;
+    }
+}
 
 void free_stack(t_stack *a)
+{
+    t_node  *current;
+    t_node  *tmp;
+
+    current = a->head;
+    while (current)
+    {
+        tmp = current->next;
+        free(current);
+        current = tmp;
+    }
+    free(a);
+}
