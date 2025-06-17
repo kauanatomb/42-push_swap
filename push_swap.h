@@ -38,6 +38,9 @@ int has_duplicate(t_stack *a, int value);
 int append_to_stack(t_stack *a, int value);
 void free_split(char **tokens, int n);
 
+//op
+void    op_sa(t_stack *a);
+
 void print_stack(t_stack *a);
 void free_stack(t_stack *a);
 

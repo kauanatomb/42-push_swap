@@ -12,3 +12,38 @@
 
 #include "push_swap.h"
 
+void    op_sa(t_stack *a)
+{
+    int     tmp_value;
+
+    if (!a || a->size < 2)
+        return ;
+    tmp_value = a->head->value;
+    a->head->value = a->head->next->value;
+    a->head->next->value = tmp_value;
+    ft_printf("sa\n");
+}
+
+void    op_pb(t_stack *a, t_stack *b)
+{
+    t_node  *top;
+
+    if (!a || !b || a->size < 1)
+        return ;
+    top = a->head;
+    a->head = top->next;
+    if (a->head == NULL)
+        a->tail = NULL;
+    else
+        a->head->prev = NULL;
+    top->next = b->head;
+    top->prev = NULL;
+    if (b->head == NULL)
+        b->tail = top;
+    else
+        b->head->prev = top;
+    b->head = top;
+    a->size--;
+    b->size++;
+    ft_printf("pb\n");
+}

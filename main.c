@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
         free_stack(a);
         return (1);
     }
+    op_sa(a);
     print_stack(a);
     free_stack(a);
     return (0);
