@@ -47,3 +47,27 @@ void    op_pb(t_stack *a, t_stack *b)
     b->size++;
     ft_printf("pb\n");
 }
+
+void    op_pa(t_stack *a, t_stack *b)
+{
+    t_node  *top;
+
+    if (!a || !b || b->size < 1)
+        return ;
+    top = b->head;
+    b->head = top->next;
+    if (b->head == NULL)
+        b->tail = NULL;
+    else
+        b->head->prev = NULL;
+    top->next = a->head;
+    top->prev = NULL;
+    if (a->size < 1)
+        a->tail = top;
+    else
+        a->head->prev = top;
+    a->head = top;
+    a->size++;
+    b->size--;
+    ft_printf("pa\n");
+}

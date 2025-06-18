@@ -32,6 +32,11 @@ int main(int argc, char *argv[])
     print_stack(a);
     ft_printf("Stack B\n");
     print_stack(b);
+    op_pa(a, b);
+    ft_printf("Stack A\n");
+    print_stack(a);
+    ft_printf("Stack B\n");
+    print_stack(b);
     free_stack(a);
     return (0);
 }
