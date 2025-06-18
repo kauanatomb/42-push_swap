@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations2.c                                      :+:      :+:    :+:   */
+/*   operations3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:39:58 by ktombola          #+#    #+#             */
-/*   Updated: 2025/06/18 11:32:22 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:33:36 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	op_sa(t_stack *a)
+void	op_ra(t_stack *a)
 {
-	stack_swap_top(a);
-	ft_printf("sa\n");
+	stack_rotate_up(a);
+	ft_printf("ra\n");
 }
 
-void	op_sb(t_stack *b)
+void	op_rb(t_stack *b)
 {
-	stack_swap_top(b);
-	ft_printf("sb\n");
+	stack_rotate_up(b);
+	ft_printf("rb\n");
 }
 
-void	op_pb(t_stack *a, t_stack *b)
+void	op_rra(t_stack *a)
 {
-	stack_push(a, b);
-	ft_printf("pb\n");
+	stack_rotate_down(a);
+	ft_printf("rra\n");
 }
 
-void	op_pa(t_stack *a, t_stack *b)
+void	op_rrb(t_stack *b)
 {
-	stack_push(b, a);
-	ft_printf("pa\n");
+	stack_rotate_down(b);
+	ft_printf("rrb\n");
 }
