@@ -71,3 +71,19 @@ void    op_pa(t_stack *a, t_stack *b)
     b->size--;
     ft_printf("pa\n");
 }
+
+void    op_ra(t_stack *a)
+{
+    t_node  *top;
+
+    if (!a || a->size < 2)
+        return ;
+    top = a->head;
+    a->head = top->next;
+    a->head->prev = NULL;
+    top->prev = a->tail;
+    top->next = NULL;
+    a->tail->next = top;
+    a->tail = top;
+    ft_printf("ra\n");
+}

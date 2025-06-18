@@ -42,6 +42,7 @@ void free_split(char **tokens, int n);
 void    op_sa(t_stack *a);
 void    op_pb(t_stack *a, t_stack *b);
 void    op_pa(t_stack *a, t_stack *b);
+void    op_ra(t_stack *a);
 
 void print_stack(t_stack *a);
 void free_stack(t_stack *a);

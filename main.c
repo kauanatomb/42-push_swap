@@ -27,16 +27,10 @@ int main(int argc, char *argv[])
         free_stack(a);
         return (1);
     }
-    op_pb(a, b);
+    op_ra(a);
     ft_printf("Stack A\n");
     print_stack(a);
-    ft_printf("Stack B\n");
-    print_stack(b);
-    op_pa(a, b);
-    ft_printf("Stack A\n");
-    print_stack(a);
-    ft_printf("Stack B\n");
-    print_stack(b);
-    free_stack(a);
+    // ft_printf("Stack B\n");
+    // print_stack(b);
     return (0);
 }
