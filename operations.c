@@ -75,3 +75,9 @@ void	stack_rotate_down(t_stack *s)
 	s->head->prev = bottom;
 	s->head = bottom;
 }
+
+void	op_sa(t_stack *a)
+{
+	stack_swap_top(a);
+	ft_printf("sa\n");
+}

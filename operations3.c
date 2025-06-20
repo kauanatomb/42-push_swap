@@ -12,18 +12,6 @@
 
 #include "push_swap.h"
 
-void	op_ra(t_stack *a)
-{
-	stack_rotate_up(a);
-	ft_printf("ra\n");
-}
-
-void	op_rb(t_stack *b)
-{
-	stack_rotate_up(b);
-	ft_printf("rb\n");
-}
-
 void	op_rra(t_stack *a)
 {
 	stack_rotate_down(a);
@@ -34,4 +22,25 @@ void	op_rrb(t_stack *b)
 {
 	stack_rotate_down(b);
 	ft_printf("rrb\n");
+}
+
+void	op_ss(t_stack *a, t_stack *b)
+{
+	stack_swap_top(a);
+	stack_swap_top(b);
+	ft_printf("ss\n");
+}
+
+void	op_rr(t_stack *a, t_stack *b)
+{
+	stack_rotate_up(a);
+	stack_rotate_up(b);
+	ft_printf("rr\n");
+}
+
+void	op_rrr(t_stack *a, t_stack *b)
+{
+	stack_rotate_down(a);
+	stack_rotate_down(b);
+	ft_printf("rrr\n");
 }
