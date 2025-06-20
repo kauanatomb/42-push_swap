@@ -55,6 +55,11 @@ void	op_rb(t_stack *b);
 void	op_rra(t_stack *a);
 void	op_rrb(t_stack *b);
 
+//push swap
+void	push_swap(t_stack *a, t_stack *b);
+void    sort_2(t_stack *a);
+void    sort_3(t_stack *a);
+
 void	print_stack(t_stack *a);
 void	free_stack(t_stack *a);
 
