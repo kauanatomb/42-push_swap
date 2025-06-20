@@ -56,7 +56,7 @@ void	sort_3(t_stack *a)
 		op_ra(a);
 }
 
-void	sort_4(t_stack *a, t_stack *b)
+void	push_smallest_to_b(t_stack *a, t_stack *b)
 {
 	t_node	*min;
 	t_node	*tmp;
@@ -64,25 +64,39 @@ void	sort_4(t_stack *a, t_stack *b)
 
 	min = a->head;
 	tmp = a->head;
-	idx = min->index;
 	while (tmp)
 	{
-		if (min->value > tmp->value)
-		{
+		if (tmp->value < min->value)
 			min = tmp;
-			idx = tmp->index;
-		}
 		tmp = tmp->next;
 	}
+	idx = min->index;
 	while (a->head->value != min->value)
 	{
-		if (idx < a->size - idx)
+		if (idx < a->size / 2)
 			op_ra(a);
 		else
 			op_rra(a);
 	}
 	op_pb(a, b);
+}
+
+
+void	sort_4(t_stack *a, t_stack *b)
+{
+	push_smallest_to_b(a, b);
 	sort_3(a);
+	op_pa(a, b);
+}
+
+void	sort_5(t_stack *a, t_stack *b)
+{
+	push_smallest_to_b(a, b);
+	push_smallest_to_b(a, b);
+	sort_3(a);
+	if (b->head->value < b->head->next->value)
+		op_sb(b);
+	op_pa(a, b);
 	op_pa(a, b);
 }
 
