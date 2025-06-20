@@ -79,5 +79,6 @@ void	stack_rotate_down(t_stack *s)
 void	op_sa(t_stack *a)
 {
 	stack_swap_top(a);
+	update_stack_indices(a);
 	ft_printf("sa\n");
 }
