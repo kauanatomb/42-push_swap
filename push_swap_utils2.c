@@ -6,7 +6,7 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:39:58 by ktombola          #+#    #+#             */
-/*   Updated: 2025/06/18 12:10:52 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:12:13 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,25 @@ void	push_swap(t_stack *a, t_stack *b)
 		sort_4(a, b);
 	else if (a->size == 5)
 		sort_5(a, b);
-	// else
-	// 	sort_big(a, b); // etapa futura
+	else
+		sort_big(a, b);
 }
 
-void    sort_2(t_stack *a)
+void	sort_2(t_stack *a)
 {
-    if (a->head->value > a->head->next->value)
-        op_sa(a);
+	if (a->head->value > a->head->next->value)
+		op_sa(a);
 }
 
 void	sort_3(t_stack *a)
 {
-	int x = a->head->value;
-	int y = a->head->next->value;
-	int z = a->tail->value;
+	int	x;
+	int	y;
+	int	z;
 
+	x = a->head->value;
+	y = a->head->next->value;
+	z = a->tail->value;
 	if (x < y && y > z && x > z)
 		op_rra(a);
 	else if (x > y && y > z)
@@ -56,20 +59,20 @@ void	sort_3(t_stack *a)
 		op_ra(a);
 }
 
-t_node *get_index_of_min(t_stack *a)
+t_node	*get_index_of_min(t_stack *a)
 {
 	t_node	*min;
 	t_node	*tmp;
 
 	tmp = a->head;
 	min = a->head;
-    while (tmp)
-    {
-        if (tmp->value < min->value)
-            min = tmp;
-        tmp = tmp->next;
-    }
-    return min;
+	while (tmp)
+	{
+		if (tmp->value < min->value)
+			min = tmp;
+		tmp = tmp->next;
+	}
+	return (min);
 }
 
 void	push_smallest_to_b(t_stack *a, t_stack *b)
@@ -105,14 +108,16 @@ void	sort_5(t_stack *a, t_stack *b)
 	op_pa(a, b);
 }
 
-void update_stack_indices(t_stack *s)
+void	update_stack_indices(t_stack *s)
 {
-    t_node *current = s->head;
-    int idx = 0;
+	t_node	*current;
+	int		idx;
 
-    while (current)
-    {
-        current->index = idx++;
-        current = current->next;
-    }
+	idx = 0;
+	current = s->head;
+	while (current)
+	{
+		current->index = idx++;
+		current = current->next;
+	}
 }
