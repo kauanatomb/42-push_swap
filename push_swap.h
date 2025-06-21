@@ -6,7 +6,7 @@
 /*   By: ktombola <ktombola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 10:21:12 by ktombola          #+#    #+#             */
-/*   Updated: 2025/06/18 11:46:59 by ktombola         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:19:04 by ktombola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 typedef struct s_node
 {
 	int				value;
+	int				rank;
 	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
 
-typedef struct s_stack {
+typedef struct s_stack
+{
 	t_node	*head;
 	t_node	*tail;
 	int		size;
@@ -54,16 +56,17 @@ void	op_ra(t_stack *a);
 void	op_rb(t_stack *b);
 void	op_rra(t_stack *a);
 void	op_rrb(t_stack *b);
-void update_stack_indices(t_stack *s);
+void	update_stack_indices(t_stack *s);
 
 //push swap
 void	push_swap(t_stack *a, t_stack *b);
-void    sort_2(t_stack *a);
-void    sort_3(t_stack *a);
+void	sort_2(t_stack *a);
+void	sort_3(t_stack *a);
 void	sort_4(t_stack *a, t_stack *b);
-t_node *get_index_of_min(t_stack *a);
+t_node	*get_index_of_min(t_stack *a);
 void	push_smallest_to_b(t_stack *a, t_stack *b);
 void	sort_5(t_stack *a, t_stack *b);
+void	sort_big(t_stack *a, t_stack *b);
 
 void	print_stack(t_stack *a);
 void	free_stack(t_stack *a);
