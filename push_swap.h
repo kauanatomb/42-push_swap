@@ -61,6 +61,7 @@ void	push_swap(t_stack *a, t_stack *b);
 void    sort_2(t_stack *a);
 void    sort_3(t_stack *a);
 void	sort_4(t_stack *a, t_stack *b);
+t_node *get_index_of_min(t_stack *a);
 void	push_smallest_to_b(t_stack *a, t_stack *b);
 void	sort_5(t_stack *a, t_stack *b);
 
