@@ -12,112 +12,51 @@
 
 #include "push_swap.h"
 
-static int	*copy_values(t_stack *a)
+static t_node	*get_index_of_min(t_stack *a)
 {
-	int		*arr;
-	t_node	*current;
-	int		i;
-
-	arr = malloc(sizeof(int) * a->size);
-	if (!arr)
-		return (NULL);
-	current = a->head;
-	i = 0;
-	while (current)
-	{
-		arr[i++] = current->value;
-		current = current->next;
-	}
-	return (arr);
-}
-
-static void	sort_int_array(int *arr, int size)
-{
-	int	i;
-	int	tmp;
-	int	swapped;
-
-	if (!arr || size < 2)
-		return ;
-	swapped = 1;
-	while (swapped)
-	{
-		swapped = 0;
-		i = 0;
-		while (i < size - 1)
-		{
-			if (arr[i] > arr[i + 1])
-			{
-				tmp = arr[i];
-				arr[i] = arr[i + 1];
-				arr[i + 1] = tmp;
-				swapped = 1;
-			}
-			i++;
-		}
-	}
-}
-
-static void	assign_ranks(t_stack *a, int *arr, int size)
-{
+	t_node	*min;
 	t_node	*tmp;
-	int		i;
 
 	tmp = a->head;
+	min = a->head;
 	while (tmp)
 	{
-		i = 0;
-		while (i < size)
-		{
-			if (tmp->value == arr[i])
-			{
-				tmp->rank = i;
-				break ;
-			}
-			i++;
-		}
+		if (tmp->value < min->value)
+			min = tmp;
 		tmp = tmp->next;
 	}
+	return (min);
 }
 
-static void	radix_sort(t_stack *a, t_stack *b)
+static void	push_smallest_to_b(t_stack *a, t_stack *b)
 {
-	int		max_bits;
-	int		i;
-	int		j;
-	int		size;
+	t_node	*min;
 
-	size = a->size;
-	max_bits = 0;
-	while ((size - 1) >> max_bits)
-		max_bits++;
-	i = 0;
-	while (i < max_bits)
+	min = get_index_of_min(a);
+	while (a->head != min)
 	{
-		j = 0;
-		while (j < size)
-		{
-			if (((a->head->rank >> i) & 1) == 0)
-				op_pb(a, b);
-			else
-				op_ra(a);
-			j++;
-		}
-		while (b->size > 0)
-			op_pa(a, b);
-		i++;
+		if (min->index < a->size / 2)
+			op_ra(a);
+		else
+			op_rra(a);
 	}
+	op_pb(a, b);
 }
 
-void	sort_big(t_stack *a, t_stack *b)
+void	sort_4(t_stack *a, t_stack *b)
 {
-	int		*arr;
+	push_smallest_to_b(a, b);
+	sort_3(a);
+	op_pa(a, b);
+}
 
-	arr = copy_values(a);
-	if (!arr)
-		return ;
-	sort_int_array(arr, a->size);
-	assign_ranks(a, arr, a->size);
-	free(arr);
-	radix_sort(a, b);
+void	sort_5(t_stack *a, t_stack *b)
+{
+	push_smallest_to_b(a, b);
+	push_smallest_to_b(a, b);
+	sort_3(a);
+	if (b->head->value < b->head->next->value)
+		op_sb(b);
+	op_pa(a, b);
+	op_pa(a, b);
 }

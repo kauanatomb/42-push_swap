@@ -11,8 +11,9 @@
 # **************************************************************************** #
 
 NAME = push_swap
-SRC = main.c push_swap_utils.c push_swap_utils2.c push_swap_utils3.c \
-		operations.c operations2.c operations3.c
+SRC = main.c push_swap_utils.c push_swap_utils1.c push_swap_utils2.c \
+		push_swap_utils3.c push_swap_utils4.c operations.c operations2.c \
+		operations3.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc

@@ -35,10 +35,6 @@ typedef struct s_stack
 
 t_stack	*init_stack(void);
 int		parse_args_into_stack(t_stack *a, int argc, char **argv);
-char	**split_args(int argc, char **argv);
-int		is_valid_integer(const char *str);
-int		ft_atoi_safe(const char *str, int *out);
-int		has_duplicate(t_stack *a, int value);
 int		append_to_stack(t_stack *a, int value);
 void	free_split(char **tokens, int n);
 
@@ -61,11 +57,8 @@ void	update_stack_indices(t_stack *s);
 
 //push swap
 void	push_swap(t_stack *a, t_stack *b);
-void	sort_2(t_stack *a);
 void	sort_3(t_stack *a);
 void	sort_4(t_stack *a, t_stack *b);
-t_node	*get_index_of_min(t_stack *a);
-void	push_smallest_to_b(t_stack *a, t_stack *b);
 void	sort_5(t_stack *a, t_stack *b);
 void	sort_big(t_stack *a, t_stack *b);
 
