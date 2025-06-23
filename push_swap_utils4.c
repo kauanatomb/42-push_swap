@@ -80,38 +80,19 @@ static void	assign_ranks(t_stack *a, int *arr, int size)
 	}
 }
 
-static void	radix_sort(t_stack *a, t_stack *b)
+static int	define_chunk_size(int size)
 {
-	int		max_bits;
-	int		i;
-	int		j;
-	int		size;
-
-	size = a->size;
-	max_bits = 0;
-	while ((size - 1) >> max_bits)
-		max_bits++;
-	i = 0;
-	while (i < max_bits)
-	{
-		j = 0;
-		while (j < size)
-		{
-			if (((a->head->rank >> i) & 1) == 0)
-				op_pb(a, b);
-			else
-				op_ra(a);
-			j++;
-		}
-		while (b->size > 0)
-			op_pa(a, b);
-		i++;
-	}
+	if (size <= 100)
+		return 20;
+	else if (size <= 500)
+		return 30;
+	else
+		return 40;
 }
 
 void	sort_big(t_stack *a, t_stack *b)
 {
-	int		*arr;
+	int	*arr;
 
 	arr = copy_values(a);
 	if (!arr)
@@ -119,5 +100,6 @@ void	sort_big(t_stack *a, t_stack *b)
 	sort_int_array(arr, a->size);
 	assign_ranks(a, arr, a->size);
 	free(arr);
-	radix_sort(a, b);
+	push_chunks(a, b, define_chunk_size(a->size));
+	sort_back_to_a(a, b);
 }

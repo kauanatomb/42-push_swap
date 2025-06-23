@@ -61,6 +61,8 @@ void	sort_3(t_stack *a);
 void	sort_4(t_stack *a, t_stack *b);
 void	sort_5(t_stack *a, t_stack *b);
 void	sort_big(t_stack *a, t_stack *b);
+void	push_chunks(t_stack *a, t_stack *b, int chunk_size);
+void	sort_back_to_a(t_stack *a, t_stack *b);
 
 void	print_stack(t_stack *a);
 void	free_stack(t_stack *a);
