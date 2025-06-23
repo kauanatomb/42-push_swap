@@ -25,11 +25,14 @@ int	main(int argc, char *argv[])
 	{
 		ft_putstr_fd("Error parsing\n", 2);
 		free_stack(a);
+		free_stack(b);
 		return (1);
 	}
 	update_stack_indices(a);
-	print_stack(a);
+	// print_stack(a);
 	push_swap(a, b);
-	print_stack(a);
+	// print_stack(a);
+	free_stack(a);
+	free_stack(b);
 	return (0);
 }

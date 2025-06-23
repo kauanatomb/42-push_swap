@@ -33,19 +33,19 @@ int	parse_args_into_stack(t_stack *a, int argc, char **argv)
 
 	tokens = split_args(argc, argv);
 	if (!tokens || !tokens[0])
-		return (ft_putstr_fd("Error: empty input\n", 2), 1);
+		return (free_split(tokens, -1), ft_putstr_fd("Error\n", 2), 1);
 	i = 0;
 	value = 0;
 	while (tokens[i])
 	{
 		if (!is_valid_integer(tokens[i]))
-			return (ft_putstr_fd("Invalid integer\n", 2), 1);
+			return (free_split(tokens, -1), ft_putstr_fd("Invalid int\n", 2), 1);
 		if (!ft_atoi_safe(tokens[i], &value))
-			return (ft_putstr_fd("Error atoi\n", 2), 1);
+			return (free_split(tokens, -1), ft_putstr_fd("Error atoi\n", 2), 1);
 		if (has_duplicate(a, value))
-			return (ft_putstr_fd("Numbers duplicated in stack\n", 2), 1);
+			return (free_split(tokens, -1), ft_putstr_fd("N duplicated\n", 2), 1);
 		if (!append_to_stack(a, value))
-			return (ft_putstr_fd("Appending error\n", 2), 1);
+			return (free_split(tokens, -1), ft_putstr_fd("Append error\n", 2), 1);
 		i++;
 	}
 	free_split(tokens, i);
@@ -166,7 +166,9 @@ void	free_split(char **tokens, int n)
 	int	i;
 
 	i = 0;
-	while (i < n)
+	if (!tokens)
+		return ;
+	while (tokens[i] && (n == -1 || i < n))
 		free(tokens[i++]);
 	free(tokens);
 }
