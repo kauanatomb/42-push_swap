@@ -29,9 +29,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	update_stack_indices(a);
-	// print_stack(a);
 	push_swap(a, b);
-	// print_stack(a);
 	free_stack(a);
 	free_stack(b);
 	return (0);

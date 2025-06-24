@@ -83,11 +83,11 @@ static void	assign_ranks(t_stack *a, int *arr, int size)
 static int	define_chunk_size(int size)
 {
 	if (size <= 100)
-		return (size / 6 + 8);   // 13–25
+		return (size / 6 + 8);
 	else if (size <= 500)
-		return (size / 13 + 20); // 30–40
+		return (size / 13 + 20);
 	else
-		return (size / 10 + 25); // para > 500
+		return (size / 10 + 25);
 }
 
 void	sort_big(t_stack *a, t_stack *b)
