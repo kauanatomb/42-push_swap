@@ -52,7 +52,7 @@ void	push_chunks(t_stack *a, t_stack *b, int chunk_size)
 		chunk_end = chunk_start + chunk_size;
 		int pushed = 0;
 		int total = a->size;
-
+		
 		while (pushed < chunk_size && total > 0)
 		{
 			int rank = a->head->rank;
