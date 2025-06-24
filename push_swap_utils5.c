@@ -14,9 +14,11 @@
 
 int	find_max_rank(t_stack *s)
 {
-	t_node	*cur = s->head;
-	int		max = cur->rank;
+	t_node	*cur;
+	int		max;
 
+	cur = s->head;
+	max = cur->rank;
 	while (cur)
 	{
 		if (cur->rank > max)
@@ -28,9 +30,11 @@ int	find_max_rank(t_stack *s)
 
 int	find_position_of_rank(t_stack *s, int target)
 {
-	t_node	*cur = s->head;
-	int		pos = 0;
+	t_node	*cur;
+	int		pos;
 
+	cur = s->head;
+	pos = 0;
 	while (cur)
 	{
 		if (cur->rank == target)
@@ -41,43 +45,54 @@ int	find_position_of_rank(t_stack *s, int target)
 	return (-1);
 }
 
+static void	push_chunk_range(t_stack *a, t_stack *b,
+	int chunk_start, int chunk_size)
+{
+	int	pushed;
+	int	total;
+	int	rank;
+
+	pushed = 0;
+	total = a->size;
+	while (pushed < chunk_size && total > 0)
+	{
+		rank = a->head->rank;
+		if (rank >= chunk_start && rank < chunk_start + chunk_size)
+		{
+			op_pb(a, b);
+			pushed++;
+			if (rank < chunk_start + (chunk_size / 2))
+				op_rb(b);
+		}
+		else
+			op_ra(a);
+		total--;
+	}
+}
+
 void	push_chunks(t_stack *a, t_stack *b, int chunk_size)
 {
-	int	chunk_start = 0;
-	int	chunk_end;
-	int	size = a->size;
+	int	size;
+	int	chunk_start;
 
+	size = a->size;
+	chunk_start = 0;
 	while (chunk_start < size)
 	{
-		chunk_end = chunk_start + chunk_size;
-		int pushed = 0;
-		int total = a->size;
-		
-		while (pushed < chunk_size && total > 0)
-		{
-			int rank = a->head->rank;
-			if (rank >= chunk_start && rank < chunk_end)
-			{
-				op_pb(a, b);
-				pushed++;
-				if (rank < chunk_start + (chunk_size / 2))
-					op_rb(b);
-			}
-			else
-				op_ra(a);
-			total--;
-		}
+		push_chunk_range(a, b, chunk_start, chunk_size);
 		chunk_start += chunk_size;
 	}
 }
 
 void	sort_back_to_a(t_stack *a, t_stack *b)
 {
+	int		max;
+	int		pos;
+
 	while (b->size > 0)
 	{
-		int max = find_max_rank(b);
-		int pos = find_position_of_rank(b, max);
-
+		max = find_max_rank(b);
+		pos = find_position_of_rank(b, max);
 		if (pos <= b->size / 2)
 		{
 			while (b->head->rank != max)
