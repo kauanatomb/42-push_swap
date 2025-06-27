@@ -21,6 +21,8 @@ int	main(int argc, char *argv[])
 		return (0);
 	a = init_stack();
 	b = init_stack();
+	if (!a || !b)
+		return (ft_putstr_fd("Error\n", 2), 1);
 	if (parse_args_into_stack(a, argc, argv) != 0)
 	{
 		ft_putstr_fd("Error\n", 2);
