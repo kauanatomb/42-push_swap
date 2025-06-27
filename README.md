@@ -61,6 +61,16 @@ Results:
 
 🚀 Tuned chunk sizes manually for optimal thresholds
 
+## 🧪 Tester Script – Bash Automation
+
+To validate the performance and correctness of the algorithm across multiple randomized inputs, I created a custom Bash script that:
+
+- Generates `$NUM_COUNT` random numbers
+- Runs `push_swap` on them
+- Pipes the output to the `checker` provided by 42
+- Tracks success rate (`OK` vs `KO`) and number of operations
+- Highlights any tests that exceed the operation threshold
+
 ## 🧩 Challenges Faced
 - Finding a balance between simplicity (Radix) and control (Chunks)
 
